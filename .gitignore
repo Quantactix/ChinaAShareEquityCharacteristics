@@ -129,5 +129,9 @@ dmypy.json
 .pyre/
 
 # Sean add
-data/
+# data/
+data/chars
+data/factors
+data/return
+data/share
 .DS_Store
