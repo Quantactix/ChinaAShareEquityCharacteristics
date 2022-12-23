@@ -1,6 +1,8 @@
 # ChinaAShareEquityCharacteristics
 Equity return and characteristics of China A-Share market
 
+You can replicate all the results by running `sh submit.sh` on a Linux machine
+
 - the codes are in `./code` folder, with full access
     - `./code/main.py` calculates stock characteristics
     - `./code/make_panel.ipynb` composes the panel data of stock returns and characteristics
