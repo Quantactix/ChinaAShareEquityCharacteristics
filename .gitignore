@@ -130,8 +130,8 @@ dmypy.json
 
 # Sean add
 # data/
-data/chars
-data/factors
-data/return
-data/share
+data/chars/*
+data/factors/*
+data/return/*
+data/share/*
 .DS_Store
