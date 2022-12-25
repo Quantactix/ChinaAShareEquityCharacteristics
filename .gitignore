@@ -134,6 +134,7 @@ dmypy.json
 # data/factors/*
 # data/return/*
 # data/share/*
+# data/csmar_tables/*
 *.csv
 *.pickle
 *.feather
