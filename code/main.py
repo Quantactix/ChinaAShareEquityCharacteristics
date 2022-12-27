@@ -21,7 +21,7 @@ class AShareMarket:
 
     def __init__(self, mode):
 
-        self.local_data_path = '../data/csmar_tables/'
+        self.local_data_path = './data/csmar_tables/'
 
         if mode == 'local':
             self.mode = 'local'
@@ -2224,7 +2224,7 @@ mytest = AShareMarket('local')
 for char in chars_list:
     function = getattr(mytest, 'calc_' + char)
     char_result = function()
-    char_result.to_csv('../data/chars/' + char + '.csv')
+    char_result.to_csv('./data/chars/' + char + '.csv')
 
     print(char + 'completed')
 
