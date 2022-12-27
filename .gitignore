@@ -140,3 +140,4 @@ dmypy.json
 *.feather
 .DS_Store
 *.log.txt
+*.pkl
