@@ -10,11 +10,20 @@ from tqdm import tqdm
 
 # list of variables
 
-char_list = ['abr','adm','beta','bm','cfp',
-             'dbeta','de','ep','idvc','m1',
-             'm11','rdm','roe','rs','season',
-             'sg','size','sp','sue','tv'
-            ]
+# char_list = ['abr','adm','beta','bm','cfp',
+#              'dbeta','de','ep','idvc','m1',
+#              'm11','rdm','roe','rs','season',
+#              'sg','size','sp','sue','tv'
+#             ]
+
+char_list = ['size', 'turnm', 'turnq', 'turna', 'vturn', 'cvturn','abturn', 'dtvm','dtvq','dtva','vdtv','cvd','Ami',
+                  'idvc', 'idvff', 'idvq','tv', 'idsff','idsq', 'idsc', 'ts', 'cs', 'dbeta', 'betafp', 'betadm', 'beta',
+                  'm1', 'm11', 'm60', 'm6', 'm3', 'indmom', 'm24', 'mchg', 'im12', 'im6', '52w', 'mdr', 'pr','abr','season',
+                  'roe', 'droe', 'roa', 'droa', 'rna','pm','ato','ct', 'gpa', 'gpla', 'ope','ople','opa','opla','tbi','bl', 'sg','sgq', 'Fscore','Oscore',
+                  'bm','dm', 'am', 'ep', 'cfp','sr','em', 'sp', 'ocfp', 'de', 'ebp','ndp',
+                  'ag', 'dpia','noa','dnoa','ig','cei','cdi', 'ivg','ivchg','oacc','tacc', 'dwc','dcoa','dcol','dnco','dnca','dncl','dfin','dbe',
+                  'adm', 'gad', 'rdm', 'rds','ol', 'hn','age','dsi','dsa', 'dgs','dss','etr','lfe','tan','vcf', 'cta', 'esm','ala','alm','sue', 'rs', 'tes','mkt_beta','vmg_beta','smb_beta','pmo_beta']
+
 
 id_list = ['asset', 'date', 'ret', 'xret', 'lag_me', 'log_me']
 
@@ -22,7 +31,7 @@ ts_list = ['rf_mon', 'mktrf', 'VMG', 'SMB', 'PMO']
 
 # read data
 
-df = pd.read_csv("./data/csmar_tables/TRD_Mnth.csv")
+df = pd.read_csv("../data/csmar_tables/TRD_Mnth.csv")
 #,encoding='utf8',error_bad_lines=False, engine ='python')
 df = df[['Stkcd','Trdmnt','Mretwd']]
 df.columns = ['asset','date','ret']
@@ -38,7 +47,7 @@ df_pivot = df_pivot.reset_index()
 # - asset characteristics
 
 for char in tqdm(char_list):
-    da = pd.read_csv("./data/chars/"+char+".csv")
+    da = pd.read_csv("../data/chars/"+char+".csv")
     #,encoding='utf8',error_bad_lines=False, engine ='python')
     da['Trdmnt'] = pd.to_datetime(da['Trdmnt'],format='%Y%m')
     da['Trdmnt'] = da['Trdmnt'] + MonthEnd(0) # the end of this month
@@ -46,12 +55,12 @@ for char in tqdm(char_list):
     # da = da[ (da['Trdmnt']>='2000') & (da['Trdmnt']<='2020')] # no need to cut the data, merging with drop the date out of range.
     df_melt = da.melt(id_vars=['Trdmnt'],value_name =char)
     df_melt.columns = ['date','asset',char]
-    outputpath="./data/tmp/"+char+".csv"
+    outputpath="../data/tmp/"+char+".csv"
     df_melt.to_csv(outputpath,sep=',',index=False,header=True)
 
 da = df.copy()
 for char in tqdm(char_list):
-    s1 = pd.read_csv("./data/tmp/"+char+".csv")
+    s1 = pd.read_csv("../data/tmp/"+char+".csv")
     #,encoding='utf8',error_bad_lines=False, engine ='python')
     s1['date'] = pd.to_datetime(s1['date'])
     da = pd.merge(da,s1,how='left',on=['date','asset'])
@@ -61,7 +70,7 @@ for char in tqdm(char_list):
 # - factors
 # - macro predictors
 
-f= pd.read_csv("./data/factors/ch4/CH_4_fac_update_20211231.csv",skiprows=9)
+f= pd.read_csv("../data/factors/ch4/CH_4_fac_update_20211231.csv",skiprows=9)
 #,encoding='utf8',error_bad_lines=False, engine ='python')
 f.rename(columns={'mnthdt':'date'}, inplace = True)
 f['date'] = pd.to_datetime([str(i) for i in f['date']])
@@ -82,7 +91,7 @@ da=da[id_list + char_list + ts_list]
 da=da[~da['xret'].isna()]
 da=da[~da['size'].isna()]
 
-da.to_csv("./data/share/panel_raw.csv")
+da.to_csv("../data/share/panel_raw.csv")
 
 # standardize the cross-sectional characteristics
 # rank the characteristics
@@ -113,4 +122,4 @@ def standardize(df):
 da_rank = standardize(da)
 
 # # output the rank data
-da_rank.to_csv("./data/share/panel_rank.csv")
+da_rank.to_csv("../data/share/panel_rank.csv")

@@ -696,10 +696,10 @@ class AShareMarket:
         result_pmo = daily_ret.copy()
         result_pmo.iloc[:, :] = np.nan
 
-        print("start rolling")
+        #print("start rolling")
 
         for j in range(result_mktrf.shape[1]):
-            print('stock'+str(j))
+            #print('stock'+str(j))
             y = np.array(daily_ret.iloc[:, j]) - rf
             try:
                 model = RollingOLS(y, x, window=trading_day_num, min_nobs=min_day_num).fit()
@@ -709,7 +709,7 @@ class AShareMarket:
                 result_pmo.iloc[:, j] = model.params[:, 4]
             except:
                 pass
-        print("over rolling")
+        #print("over rolling")
         for result in (result_mktrf,result_vmg,result_smb,result_pmo):
             result['Trdmnt'] = list(result.index)
             result.Trdmnt = result.Trdmnt.apply(lambda x: x[0:6])
@@ -1877,6 +1877,7 @@ class AShareMarket:
         employee = mon_ret*employee
         employee.fillna(method='ffill', inplace=True)
         hn = (employee - employee.shift(12)) / (0.5*employee + 0.5*employee.shift(12))
+        hn.index.names = ['Trdmnt']
         return hn
 
     # B.2.4.10 Firm Age (age)
@@ -1959,6 +1960,7 @@ class AShareMarket:
         employee = mon_ret * employee
         employee.fillna(method='ffill', inplace=True)
         lfe = (sales/employee - sales.shift(12)/employee.shift(12)) / (sales.shift(12)/employee.shift(12))
+        lfe.index.names = ['Trdmnt']
         return lfe
 
 
@@ -2179,8 +2181,8 @@ class AShareMarket:
 ##############################################################################
 # All charateristics
 
-# 119 all charateristics
-chars_list_all = ['size', 'size3', 'turnm', 'turnq', 'turna', 'vturn', 'cvturn','abturn', 'dtvm','dtvq','dtva','vdtv','cvd','Ami',
+# 118 all charateristics
+chars_list_all = ['size',  'turnm', 'turnq', 'turna', 'vturn', 'cvturn','abturn', 'dtvm','dtvq','dtva','vdtv','cvd','Ami',
                   'idvc', 'idvff', 'idvq','tv', 'idsff','idsq', 'idsc', 'ts', 'cs', 'dbeta', 'betafp', 'betadm', 'beta',
                   'm1', 'm11', 'm60', 'm6', 'm3', 'indmom', 'm24', 'mchg', 'im12', 'im6', '52w', 'mdr', 'pr','abr','season',
                   'roe', 'droe', 'roa', 'droa', 'rna','pm','ato','ct', 'gpa', 'gpla', 'ope','ople','opa','opla','tbi','bl', 'sg','sgq', 'Fscore','Oscore',
@@ -2189,7 +2191,7 @@ chars_list_all = ['size', 'size3', 'turnm', 'turnq', 'turna', 'vturn', 'cvturn',
                   'adm', 'gad', 'rdm', 'rds','ol', 'hn','age','dsi','dsa', 'dgs','dss','etr','lfe','tan','vcf', 'cta', 'esm','ala','alm','sue', 'rs', 'tes','mkt_beta','vmg_beta','smb_beta','pmo_beta']
 
 # 42 trading charateristics
-chars_list_trading = ['size', 'size3', 'turnm', 'turnq', 'turna', 'vturn', 'cvturn','abturn', 'dtvm','dtvq','dtva','vdtv','cvd','Ami',
+chars_list_trading = ['size',  'turnm', 'turnq', 'turna', 'vturn', 'cvturn','abturn', 'dtvm','dtvq','dtva','vdtv','cvd','Ami',
                   'idvc', 'idvff', 'idvq','tv', 'idsff','idsq', 'idsc', 'ts', 'cs', 'dbeta', 'betafp', 'betadm', 'beta',
                   'm1', 'm11', 'm9', 'm6', 'm3', 'indmom', 'm24', 'mchg', 'im12', 'im6', '52w', 'mdr', 'pr','abr','season']
 
@@ -2206,7 +2208,7 @@ chars_list_year = ['gpa','ope','opa','sr','de','sg']
 chars_list_4beta = ['mkt_beta','vmg_beta','smb_beta','pmo_beta']
 
 '''
-B.1.1 Liquidity : 14
+B.1.1 Liquidity : 13
 B.1.2 Risk : 13
 B.1.3 Past Returns : 15
 B.2.1 Profitability : 20
@@ -2214,12 +2216,13 @@ B.2.2 Value : 12
 B.2.3 Investment : 19
 B.2.4 Other Anomalies : 22
 Chinese 4 beta : 4
-total : 119
+total : 118
 '''
 
 # to calculate
 # you can choose any characteristics you want to calculate
 chars_list = chars_list_all
+
 
 print(len(chars_list))
 mytest = AShareMarket('local')
