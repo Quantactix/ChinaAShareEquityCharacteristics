@@ -21,7 +21,7 @@ class AShareMarket:
 
     def __init__(self, mode):
 
-        self.local_data_path = './data/csmar_tables/'
+        self.local_data_path = '../data/csmar_tables/'
 
         if mode == 'local':
             self.mode = 'local'
@@ -2179,14 +2179,14 @@ class AShareMarket:
 ##############################################################################
 # All charateristics
 
-# 115 all charateristics
+# 119 all charateristics
 chars_list_all = ['size', 'size3', 'turnm', 'turnq', 'turna', 'vturn', 'cvturn','abturn', 'dtvm','dtvq','dtva','vdtv','cvd','Ami',
                   'idvc', 'idvff', 'idvq','tv', 'idsff','idsq', 'idsc', 'ts', 'cs', 'dbeta', 'betafp', 'betadm', 'beta',
                   'm1', 'm11', 'm60', 'm6', 'm3', 'indmom', 'm24', 'mchg', 'im12', 'im6', '52w', 'mdr', 'pr','abr','season',
                   'roe', 'droe', 'roa', 'droa', 'rna','pm','ato','ct', 'gpa', 'gpla', 'ope','ople','opa','opla','tbi','bl', 'sg','sgq', 'Fscore','Oscore',
                   'bm','dm', 'am', 'ep', 'cfp','sr','em', 'sp', 'ocfp', 'de', 'ebp','ndp',
                   'ag', 'dpia','noa','dnoa','ig','cei','cdi', 'ivg','ivchg','oacc','tacc', 'dwc','dcoa','dcol','dnco','dnca','dncl','dfin','dbe',
-                  'adm', 'gad', 'rdm', 'rds','ol', 'hn','age','dsi','dsa', 'dgs','dss','etr','lfe','tan','vcf', 'cta', 'esm','ala','alm','sue', 'rs', 'tes']
+                  'adm', 'gad', 'rdm', 'rds','ol', 'hn','age','dsi','dsa', 'dgs','dss','etr','lfe','tan','vcf', 'cta', 'esm','ala','alm','sue', 'rs', 'tes','mkt_beta','vmg_beta','smb_beta','pmo_beta']
 
 # 42 trading charateristics
 chars_list_trading = ['size', 'size3', 'turnm', 'turnq', 'turna', 'vturn', 'cvturn','abturn', 'dtvm','dtvq','dtva','vdtv','cvd','Ami',
@@ -2202,6 +2202,8 @@ chars_list_quarter = ['roe', 'droe', 'roa', 'droa', 'rna','pm','ato','ct','gpla'
 # 6 yearly charateristics
 chars_list_year = ['gpa','ope','opa','sr','de','sg']
 
+# 4 Chinese beta charateristics
+chars_list_4beta = ['mkt_beta','vmg_beta','smb_beta','pmo_beta']
 
 '''
 B.1.1 Liquidity : 14
@@ -2211,7 +2213,8 @@ B.2.1 Profitability : 20
 B.2.2 Value : 12
 B.2.3 Investment : 19
 B.2.4 Other Anomalies : 22
-total : 115
+Chinese 4 beta : 4
+total : 119
 '''
 
 # to calculate
@@ -2224,7 +2227,7 @@ mytest = AShareMarket('local')
 for char in chars_list:
     function = getattr(mytest, 'calc_' + char)
     char_result = function()
-    char_result.to_csv('./data/chars/' + char + '.csv')
+    char_result.to_csv('../data/chars/' + char + '.csv')
 
     print(char + 'completed')
 
