@@ -8,8 +8,8 @@ def read_pickle_file(file):
     pickle_data = pd.read_pickle(file)
     return pickle_data
 
-cs_vw = read_pickle_file('./data/share/cs_vw.pkl')
-cs_ew = read_pickle_file('./data/share/cs_ew.pkl')
+cs_vw = read_pickle_file('../data/share/cs_vw.pkl')
+cs_ew = read_pickle_file('../data/share/cs_ew.pkl')
 
 # # Print Returns
 
@@ -22,7 +22,7 @@ for c in cs_vw.char_list:
     uni_ret=uni_ret.append(tmp.T)
     del tmp
     
-uni_ret.T.to_csv('./data/share/sorted_portfolio_vw/unisort_returns.csv')
+uni_ret.T.to_csv('../data/share/sorted_portfolio_vw/unisort_returns.csv')
 
 uni_sr = [] 
 uni_ls_ret = pd.DataFrame()
@@ -37,7 +37,7 @@ for c in cs_vw.char_list:
     del tmp
 
 uni_sr = pd.Series(uni_sr, index=cs_vw.char_list)
-uni_ls_ret.to_csv('./data/share/sorted_portfolio_vw/unifactor_returns.csv')
+uni_ls_ret.to_csv('../data/share/sorted_portfolio_vw/unifactor_returns.csv')
 
 bi_sr = [] 
 bi_ret = pd.DataFrame()
@@ -50,7 +50,7 @@ for c in cs_vw.char_list[1:]:
     exec(expr)
     del tmp
     
-bi_ret.T.to_csv('./data/share/sorted_portfolio_vw/bisort_returns.csv')
+bi_ret.T.to_csv('../data/share/sorted_portfolio_vw/bisort_returns.csv')
 
 
 # # EW
@@ -65,7 +65,7 @@ for c in cs_ew.char_list:
     uni_ret=uni_ret.append(tmp.T)
     del tmp
     
-uni_ret.T.to_csv('./data/share/sorted_portfolio_ew/unisort_returns.csv')
+uni_ret.T.to_csv('../data/share/sorted_portfolio_ew/unisort_returns.csv')
 
 uni_sr = [] 
 uni_ls_ret = pd.DataFrame()
@@ -81,7 +81,7 @@ for c in cs_ew.char_list:
     del tmp
 
 uni_sr = pd.Series(uni_sr, index=cs_ew.char_list)
-uni_ls_ret.to_csv('./data/share/sorted_portfolio_ew/unifactor_returns.csv')
+uni_ls_ret.to_csv('../data/share/sorted_portfolio_ew/unifactor_returns.csv')
 
 bi_sr = [] 
 bi_ret = pd.DataFrame()
@@ -94,4 +94,4 @@ for c in cs_ew.char_list[1:]:
     exec(expr)
     del tmp
     
-bi_ret.T.to_csv('./data/share/sorted_portfolio_ew/bisort_returns.csv')
+bi_ret.T.to_csv('../data/share/sorted_portfolio_ew/bisort_returns.csv')
