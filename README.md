@@ -1,5 +1,5 @@
 # [ChinaAShareEquityCharacteristics](https://github.com/Quantactix/ChinaAShareEquityCharacteristics)
-Equity return and characteristics of China A-Share market
+Equity return and 100 Characteristics of China A-Share market
 
 You can replicate all the results by running `sh submit.sh` on a Linux machine
 
