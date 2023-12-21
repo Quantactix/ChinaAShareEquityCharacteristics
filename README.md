@@ -13,3 +13,11 @@ You can replicate all the results by running `sh submit.sh` on a Linux machine
     - `./data/csmar_tables` stores the raw data from CSMAR
     - `./data/factor` stores the factors data, which are downloaded from other sources, for exmaple CH4 data from Robert Stambaugh's website
     - `./data/share` stores the output data of the repository, including the panel data of stock returns and characteristics, and sorted portfolio retunrs
+
+## Contact
+
+Xin He
+
+xinhe9701@gmail.com
+
+www.xinhesean.com
