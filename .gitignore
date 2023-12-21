@@ -130,12 +130,12 @@ dmypy.json
 
 # Sean add
 # data/
-# data/chars/*
-# data/factors/*
-# data/return/*
-# data/share/*
-# data/csmar_tables/*
-*.csv
+data/chars/*
+data/factors/*
+data/return/*
+data/share/*
+data/csmar_tables/*
+# *.csv
 *.pickle
 *.feather
 .DS_Store
